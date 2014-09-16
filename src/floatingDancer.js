@@ -6,14 +6,18 @@ var FloatingDancer = function(top, left){
   this.floor = top;
   this.top = top;
   this.left = left;
-  this.$shadow = $('<span class="shadow"></span>');
-
+  this.$shadow=$('<span class="shadow"></span>');
   Dancer.call(this, top, left, 1);
-  this.$node.append(this.$shadow);
 };
 
 FloatingDancer.prototype = Object.create(Dancer.prototype);
 FloatingDancer.prototype.constructor = FloatingDancer;
+FloatingDancer.prototype.createNode = function(){
+    var node = $('<span class="dancerContainer"></span>');
+    node.append('<span class="dancer"></span>');
+    node.append(this.$shadow);
+    return node;
+}
 
 FloatingDancer.prototype.step = function(){
   Dancer.prototype.step.call(this);
@@ -31,7 +35,7 @@ FloatingDancer.prototype.step = function(){
   this.setPosition(this.top,this.left);
   var styleSettings = {
     top: this.floor-displacement,
-    left: -15
+    left: 0
   };
   this.$shadow.css(styleSettings);
 };

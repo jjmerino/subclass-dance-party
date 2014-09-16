@@ -20,14 +20,19 @@ body, a:link, a:visited, a:active{
 .title{
   background-color: #777;
 }
+.dancerContainer {
+
+  position:absolute;
+  padding:0;
+}
 .dancer{
+  z-index:10000;
   border:10px solid red;
   border-radius:10px;
   position:absolute;
   padding:0;
 }
 .shadow{
-
   width: 20px;
   height: 10px;
   background: #2f2f2f;

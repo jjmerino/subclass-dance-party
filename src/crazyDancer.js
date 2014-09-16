@@ -1,11 +1,18 @@
 var CrazyDancer = function(top, left, timeBetweenSteps){
   this.radius = 50;
-  this.center = [left, top];
+  this.$center = $('<span class="dancer"></span>');
   Dancer.call(this, top, left, timeBetweenSteps);
+  this.speed = 1.13;
 };
 
 CrazyDancer.prototype = Object.create(Dancer.prototype);
 CrazyDancer.prototype.constructor = CrazyDancer;
+
+CrazyDancer.prototype.createNode = function(){
+    var node = $('<span class="dancerContainer"></span>');
+    node.append(this.$center);
+    return node;
+}
 
 CrazyDancer.prototype.step = function(){
 
@@ -16,7 +23,10 @@ CrazyDancer.prototype.step = function(){
   //this.$node.toggle();
   var dx = Math.random() * this.radius * 2 - this.radius;
   var dy = Math.random() * this.radius * 2 - this.radius;
-  this.top = this.center[1] + dy;
-  this.left = this.center[0] + dx;
-  this.setPosition(this.top,this.left);
+  var styleSettings = {
+    top: dy,
+    left: dx
+  };
+  this.$center.css(styleSettings);
+  this.setPosition(this.top, this.left);
 };
