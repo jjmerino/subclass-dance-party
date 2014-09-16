@@ -13,23 +13,47 @@ describe("crazyDancer", function() {
     expect(crazyDancer.$node).to.be.an.instanceof(jQuery);
   });
 
-  it("should have a step function that makes its node blink", function() {
-    sinon.spy(crazyDancer.$node, 'toggle');
-    crazyDancer.step();
-    expect(crazyDancer.$node.toggle.called).to.be.true;
-  });
-
   describe("dance", function(){
-    it("should call step at least once per second", function(){
+    it('expect changing left and top', function(){
       sinon.spy(crazyDancer, "step");
-      expect(crazyDancer.step.callCount).to.be.equal(0);
-      clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
+
+      var left = crazyDancer.left;
+      var top = crazyDancer.top;
+      clock.tick(timeBetweenSteps);
+       // ? it seems an extra tick is necessary...
       clock.tick(timeBetweenSteps);
 
-      expect(crazyDancer.step.callCount).to.be.equal(1);
+      expect(crazyDancer.left).not.to.equal(left);
+      expect(crazyDancer.top).not.to.equal(top);
+
+      left = crazyDancer.left;
+      top = crazyDancer.top;
 
       clock.tick(timeBetweenSteps);
-      expect(crazyDancer.step.callCount).to.be.equal(2);
+
+      expect(crazyDancer.left).not.to.be.equal(left);
+      expect(crazyDancer.top).not.to.be.equal(top);
+    });
+    it('expect changing left and top inside the radius', function(){
+      sinon.spy(crazyDancer, "step");
+
+      clock.tick(timeBetweenSteps);
+       // ? it seems an extra tick is necessary...
+      clock.tick(timeBetweenSteps);
+
+      expect(Math.abs(crazyDancer.left-crazyDancer.center[0])<crazyDancer.radius).to.equal(true);
+      expect(Math.abs(crazyDancer.top-crazyDancer.center[1])<crazyDancer.radius).to.equal(true);
+
+      clock.tick(timeBetweenSteps);
+
+      expect(Math.abs(crazyDancer.left-crazyDancer.center[0])<crazyDancer.radius).to.equal(true);
+      expect(Math.abs(crazyDancer.top-crazyDancer.center[1])<crazyDancer.radius).to.equal(true);
+
+      clock.tick(timeBetweenSteps);
+
+      expect(Math.abs(crazyDancer.left-crazyDancer.center[0])<crazyDancer.radius).to.equal(true);
+      expect(Math.abs(crazyDancer.top-crazyDancer.center[1])<crazyDancer.radius).to.equal(true);
     });
   });
+
 });

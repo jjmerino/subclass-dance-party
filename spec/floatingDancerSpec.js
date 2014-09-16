@@ -1,7 +1,7 @@
 describe("floatingDancer", function() {
 
   var floatingDancer;
-  var timeBetweenSteps = 100;
+  var timeBetweenSteps = 0;
   var clock;
 
   beforeEach(function() {
@@ -13,23 +13,16 @@ describe("floatingDancer", function() {
     expect(floatingDancer.$node).to.be.an.instanceof(jQuery);
   });
 
-  it("should have a step function that makes its node blink", function() {
-    sinon.spy(floatingDancer.$node, 'toggle');
-    floatingDancer.step();
-    expect(floatingDancer.$node.toggle.called).to.be.true;
-  });
-
   describe("dance", function(){
-    it("should call step at least once per second", function(){
+    it("should not be lost into nothingness", function(){
       sinon.spy(floatingDancer, "step");
-      expect(floatingDancer.step.callCount).to.be.equal(0);
-      clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
-      clock.tick(timeBetweenSteps);
+      var ceiling = floatingDancer.floor - floatingDancer.height - floatingDancer.lambda;
 
-      expect(floatingDancer.step.callCount).to.be.equal(1);
-
-      clock.tick(timeBetweenSteps);
-      expect(floatingDancer.step.callCount).to.be.equal(2);
+      for(var i = 0; i < 1000; i++){
+        clock.tick(timeBetweenSteps);
+        expect(floatingDancer.top<=floatingDancer.floor).to.equal(true);
+        expect(floatingDancer.top>=ceiling).to.equal(true);
+      }
     });
   });
 });
