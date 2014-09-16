@@ -24,4 +24,18 @@ body, a:link, a:visited, a:active{
   border:10px solid red;
   border-radius:10px;
   position:absolute;
+  padding:0;
+}
+.shadow{
+
+  width: 20px;
+  height: 10px;
+  background: #2f2f2f;
+  -moz-border-radius: 10px / 5px;
+  -webkit-border-radius: 10px / 5px;
+  border-radius: 10px / 5px;
+
+  margin: 0;
+  position:absolute;
+
 }

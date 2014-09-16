@@ -6,9 +6,10 @@ var FloatingDancer = function(top, left){
   this.floor = top;
   this.top = top;
   this.left = left;
+  this.$shadow = $('<span class="shadow"></span>');
 
   Dancer.call(this, top, left, 1);
-
+  this.$node.append(this.$shadow);
 };
 
 FloatingDancer.prototype = Object.create(Dancer.prototype);
@@ -19,12 +20,18 @@ FloatingDancer.prototype.step = function(){
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
-
+  var displacement = 0;
   if (this.time < this.timePrime){
-    this.top = this.floor - this.height + this.height * (this.timePrime - this.time) / this.timePrime;
+    displacement = this.floor - this.height + this.height * (this.timePrime - this.time) / this.timePrime;
   } else {
-    this.top = this.floor - this.height - Math.sin((this.time - this.timePrime)/this.timePrime) * this.lambda ;
+    displacement = this.floor - this.height - Math.sin((this.time - this.timePrime)/this.timePrime) * this.lambda ;
   }
-  this.setPosition(this.top, this.left);
+  this.top = displacement;
   this.time++;
+  this.setPosition(this.top,this.left);
+  var styleSettings = {
+    top: this.floor-displacement,
+    left: -15
+  };
+  this.$shadow.css(styleSettings);
 };
