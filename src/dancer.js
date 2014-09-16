@@ -10,10 +10,10 @@ var Dancer = function(top, left, timeBetweenSteps){
   this.$node = this.createNode();
   this.setPosition(this.top, this.left);
   this.step();
-}
+};
   Dancer.prototype.createNode = function(){
     return $('<span class="dancer"></span>');
-  }
+  };
 
   Dancer.prototype.step = function(){
     if(window.peek){
@@ -36,8 +36,11 @@ var Dancer = function(top, left, timeBetweenSteps){
     var forceY = 0;
     for (var i = 0; i < window.dancers.length; i++){
       var dancer = window.dancers[i];
+      var otherY = dancer.top;
+      var otherX = dancer.left;
 
-      var distance = Math.sqrt(Math.pow(dancer.left - this.left,2) + Math.pow(dancer.top - this.top,2));
+
+      var distance = Math.sqrt(Math.pow(otherX - this.left,2) + Math.pow(otherY - this.top,2));
       if (distance > 200){
         continue;
       }
@@ -46,14 +49,14 @@ var Dancer = function(top, left, timeBetweenSteps){
         continue;
       }
       var force = distance < 5 ? Math.exp(1/5) : Math.exp(1/(distance));
-      var angle = Math.atan2(-dancer.top + this.top,dancer.left - this.left);
+      var angle = Math.atan2(-otherY + this.top,otherX - this.left);
       forceX = -Math.cos(angle) * force;
       forceY = Math.sin(angle) * force;
 
-      if(dancer.top - this.top < 0){
+      if(otherY - this.top < 0){
         forceY = forceY;
       }
-      if(dancer.left - this.left < 0 ){
+      if(otherX - this.left < 0 ){
         forceX = forceX;
       }
     }
@@ -79,11 +82,18 @@ var Dancer = function(top, left, timeBetweenSteps){
     this.$node.css(styleSettings);
   };
 
+  Dancer.prototype.handleClick = function(){
+    var styleSettings = {
+      'background-color': 'green'
+    };
+    this.$node.css(styleSettings);
+  };
+
   Dancer.prototype.lineUp = function(to){
     this._liningUp = true;
     this._alpha = 0;
     this._from = this.left;
     this._to = to;
 
-  }
+  };
 

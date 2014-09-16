@@ -16,7 +16,7 @@ $(document).ready(function(){
      * to the stage.
      */
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-
+    // window.BlinkyDancer === window["BlinkyDancer"]
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
@@ -27,11 +27,21 @@ $(document).ready(function(){
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
+    dancer.$node.on('click',function(event){
+      var styles = {
+        'border-color': 'green'
+      };
+      if($(this).hasClass('dancer')){
+       $(this).css(styles);
+      }else{
+       $(this).find('.dancer').css(styles);
+      }
+    });
     $('body').append(dancer.$node);
     window.dancers.push(dancer);
   });
+
   $(".lineUpButton").on("click", function(event){
-    console.log('i am being called');
     for(var i = 0; i < window.dancers.length; i++){
       var dancer = window.dancers[i];
       dancer.lineUp(500);
