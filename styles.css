@@ -4,6 +4,7 @@ body, html{
 body{
   margin: 0px;
   background-color:#444;
+  background-image:url('img/bg.jpg');
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{
@@ -32,14 +33,27 @@ body, a:link, a:visited, a:active{
   position:absolute;
   padding:0;
 }
+.bat {
+  width:177px;
+  height:100px;
+  border:none;
+  background-repeat: no-repeat;
+  background-image:url('img/bat.gif');
+}
+.futurama {
+  overflow:visible;
+  width:100px;
+  height:116px;
+  border:none;
+  background-image:url('img/dancer1.gif');
+}
 .shadow{
-  width: 20px;
-  height: 10px;
+  width: 177px;
+  height: 20px;
   background: #2f2f2f;
-  -moz-border-radius: 10px / 5px;
-  -webkit-border-radius: 10px / 5px;
-  border-radius: 10px / 5px;
-
+  -moz-border-radius: 177px / 20px;
+  -webkit-border-radius: 177px / 20px;
+  border-radius: 177px / 20px;
   margin: 0;
   position:absolute;
 

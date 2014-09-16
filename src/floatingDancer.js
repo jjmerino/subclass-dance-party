@@ -5,7 +5,7 @@ var FloatingDancer = function(top, left){
   this.lambda = 10;
   this.top = top;
   this.left = left;
-  this.$redGuy = $('<span class="dancer"></span>');
+  this.$redGuy = $('<span class="dancer bat"></span>');
   this.$shadow=$('<span class="shadow"></span>');
   Dancer.call(this, top, left, 1);
 };
@@ -38,7 +38,7 @@ FloatingDancer.prototype.step = function(){
   };
   this.$shadow.css(styleSettings);
   var nodeSettings = {
-    top: -2*this.height+displacement,
+    top: -3*this.height+displacement,
     left: 0
   };
   this.$redGuy.css(nodeSettings);

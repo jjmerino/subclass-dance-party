@@ -1,6 +1,6 @@
 var CrazyDancer = function(top, left, timeBetweenSteps){
   this.radius = 50;
-  this.$center = $('<span class="dancer"></span>');
+  this.$center = $('<span class="dancer futurama"></span>');
   Dancer.call(this, top, left, timeBetweenSteps);
   this.speed = 1.13;
 };
@@ -12,7 +12,7 @@ CrazyDancer.prototype.createNode = function(){
     var node = $('<span class="dancerContainer"></span>');
     node.append(this.$center);
     return node;
-}
+};
 
 CrazyDancer.prototype.step = function(){
 

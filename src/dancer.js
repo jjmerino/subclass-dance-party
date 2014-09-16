@@ -48,7 +48,7 @@ var Dancer = function(top, left, timeBetweenSteps){
 
         continue;
       }
-      var force = distance < 5 ? Math.exp(1/5) : Math.exp(1/(distance));
+      var force = distance < 5 ? Math.exp(1/1) : Math.exp(1/(distance/5));
       var angle = Math.atan2(-otherY + this.top,otherX - this.left);
       forceX = -Math.cos(angle) * force;
       forceY = Math.sin(angle) * force;
